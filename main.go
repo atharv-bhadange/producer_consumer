@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 
+	"github.com/atharv-bhadange/producer_consumer/api/v1/routes"
 	"github.com/atharv-bhadange/producer_consumer/configs"
 	"github.com/atharv-bhadange/producer_consumer/database"
 	"github.com/gofiber/fiber/v2"
@@ -26,9 +27,7 @@ func main() {
 
 	app := fiber.New()
 
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Server is up and running")
-	})
+	routes.InitRoutes(app)
 
 	app.Listen(port)
 
