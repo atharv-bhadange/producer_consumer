@@ -6,8 +6,5 @@ import (
 )
 
 func UserRoutes(router fiber.Router) {
-	
-	router.Post("/user", handlers.CreateUser)
 	router.Get("/user/:id", handlers.GetUser)
-	router.Get("/user", handlers.GetAllUsers)
 }
