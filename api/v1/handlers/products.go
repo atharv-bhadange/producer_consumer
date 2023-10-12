@@ -21,8 +21,6 @@ func CreateProduct(c *fiber.Ctx) error {
 
 	db := database.DB.Db
 
-	// Create product in database use gorm
-
 	if err := db.Create(&product).Error; err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(
 			models.Response{
@@ -37,7 +35,9 @@ func CreateProduct(c *fiber.Ctx) error {
 		models.Response{
 			Status:  fiber.StatusCreated,
 			Message: "Product created successfully",
-			Data:    fiber.Map{"product": product},
+			Data: fiber.Map{
+				"product_id": product.ProductID,
+			},
 		},
 	)
 }
@@ -135,7 +135,10 @@ func UpdateProduct(c *fiber.Ctx) error {
 		models.Response{
 			Status:  fiber.StatusOK,
 			Message: "Product updated successfully",
-			Data:    fiber.Map{"product": product},
+			Data: fiber.Map{
+				"product_id": product.ProductID,
+				"updated":    true,
+			},
 		},
 	)
 
