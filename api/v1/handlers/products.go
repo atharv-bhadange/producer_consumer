@@ -3,6 +3,7 @@ package handlers
 import (
 	"github.com/atharv-bhadange/producer_consumer/database"
 	"github.com/atharv-bhadange/producer_consumer/models"
+	"github.com/atharv-bhadange/producer_consumer/producer"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -26,6 +27,18 @@ func CreateProduct(c *fiber.Ctx) error {
 			models.Response{
 				Status:  fiber.StatusInternalServerError,
 				Message: "Unable to create product",
+				Data:    nil,
+			},
+		)
+	}
+
+	err := producer.PublishMessage(product.ProductID)
+
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(
+			models.Response{
+				Status:  fiber.StatusInternalServerError,
+				Message: "Unable to publish message",
 				Data:    nil,
 			},
 		)

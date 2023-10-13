@@ -28,3 +28,13 @@ func GetPort() string {
 
 	return ":" + port
 }
+
+func GetRabbitMQUrl() string {
+	rabbitmq_url := os.Getenv("RABBITMQ_URL")
+
+	if rabbitmq_url == "" {
+		return "amqp://guest:guest@localhost:5672/"
+	}
+
+	return rabbitmq_url
+}

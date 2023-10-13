@@ -14,18 +14,5 @@ services:
     volumes:
       - db:/var/lib/postgresql/data 
 
-  server:
-    container_name: server
-    build: 
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - 8000:8000
-    depends_on: 
-      - database
-    env_file:
-      - .env
-
-
 volumes:
   db:
